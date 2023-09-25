@@ -33,22 +33,24 @@ public class UIManager : MonoBehaviour
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
     }
+
     public void LoginScreen() //Back button
     {
+        ClearScreen();
         loginUI.SetActive(true);
-        registerUI.SetActive(false);
     }
-    public void RegisterScreen() // Register button
+    public void RegisterScreen() // Regester button
     {
-        loginUI.SetActive(false);
+        ClearScreen();
         registerUI.SetActive(true);
     }
-    
+
     public void UserDataScreen() //Logged in
     {
         ClearScreen();
         userDataUI.SetActive(true);
     }
+
     public void ScoreboardScreen() //Scoreboard button
     {
         ClearScreen();

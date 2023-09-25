@@ -1,7 +1,10 @@
 using System.Collections;
 using UnityEngine;
+
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
+
 using TMPro;
 using System.Threading.Tasks;
 
@@ -26,6 +29,12 @@ public class FirebaseManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+    
+    [Header("UserData")]
+    public TMP_InputField usernameField;
+    public TMP_InputField killsField;
+    public GameObject scoreElement;
+    public Transform scoreboardContent;
 
     void Awake()
     {
@@ -51,6 +60,21 @@ public class FirebaseManager : MonoBehaviour
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
     }
+    //Poner los text box blancos again
+    public void ClearLoginFeilds()
+    {
+        emailLoginField.text = "";
+        passwordLoginField.text = "";
+    }
+    public void ClearRegisterFeilds()
+    {
+        usernameRegisterField.text = "";
+        emailRegisterField.text = "";
+        passwordRegisterField.text = "";
+        passwordRegisterVerifyField.text = "";
+    }
+    
+    
 
     //Function for the login button
     public void LoginButton()
@@ -66,6 +90,15 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
     }
 
+    //Function for the sign out button
+    public void SignOutButton()
+    {
+        auth.SignOut();
+        UIManager.instance.LoginScreen();
+        ClearRegisterFeilds();
+        ClearLoginFeilds();
+    }
+    
     private IEnumerator Login(string _email, string _password)
     {
         //Call the Firebase auth signin function passing the email and password
