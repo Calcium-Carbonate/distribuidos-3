@@ -38,6 +38,7 @@ public class FirebaseManager : MonoBehaviour
     public TMP_Text killsField;
     public GameObject scoreElement;
     public Transform scoreboardContent;
+   
 
     void Awake()
     {
@@ -108,6 +109,11 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
         
         StartCoroutine(UpdateKills(score));
+    }
+
+    public void UpdateScore()
+    {
+        StartCoroutine(LoadUserData());
     }
     
     public void ScoreboardButton()

@@ -19,6 +19,10 @@ public class BallController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         fireManager = FindObjectOfType<FirebaseManager>();
         uiManager   = FindObjectOfType<UIManager>();
+
+        gameManager.gameIsOver = false;
+        
+        score = 0;
         
         rb = GetComponent<Rigidbody>();
         
@@ -53,11 +57,15 @@ public class BallController : MonoBehaviour
             // La pelota colisiona con el objeto transparente que indica la derrota
             // Llama al método PlayerLost() del GameManager
             
-            
+
             fireManager.SaveDataButton(score);
+            fireManager.UpdateScore();
+            uiManager.ReplaceValue(score);
             uiManager.LostGame();
             gameManager.PlayerLost();
+
             
+            Destroy(gameObject,1f);
             
         }
     }

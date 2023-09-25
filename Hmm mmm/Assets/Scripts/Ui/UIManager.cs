@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameScreenUi;
     public GameObject lostUi;
 
+    public TMP_Text finalScore;
     private void Awake()
     {
         if (instance == null)
@@ -76,6 +78,11 @@ public class UIManager : MonoBehaviour
     {
         ClearScreen();
         lostUi.SetActive(true);
+    }
+
+    public void ReplaceValue(int score)
+    {
+        finalScore.text= "Final Score: " + score;
     }
     
 }

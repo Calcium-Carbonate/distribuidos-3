@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Button restartButton; // Referencia al botón de reinicio
     public GameObject ball;
     
-    private bool gameIsOver = false;
+    public bool gameIsOver = false;
     
 
     // Método para incrementar la puntuación y actualizar el marcador
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
             // Muestra el panel de Game Over
 
             score = 0;
+            scoreText.text = "Puntuación: " + score;
             gameIsOver = true;
         }
     }
