@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 
 
-public class AuthManager : MonoBehaviour
+public class FirebaseManager : MonoBehaviour
 {
     //Firebase variables
     [Header("Firebase")] public DependencyStatus dependencyStatus;
@@ -110,6 +110,13 @@ public class AuthManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
+            
+            yield return new WaitForSeconds(2);
+
+            
+            UIManager.instance.UserDataScreen(); // Change to user data UI
+            confirmLoginText.text = "";
+            
         }
     }
 
