@@ -363,6 +363,7 @@ public class FirebaseManager : MonoBehaviour
 
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                Debug.Log("crear scoreboard element");
                 scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, kills);
             }
 
