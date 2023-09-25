@@ -11,9 +11,15 @@ public class BallController : MonoBehaviour
     private Vector2 initialDirection; // Dirección inicial de la pelota
     
     private GameManager gameManager;
+    private FirebaseManager fireManager;
+    private UIManager uiManager;
+   
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        fireManager = FindObjectOfType<FirebaseManager>();
+        uiManager   = FindObjectOfType<UIManager>();
+        
         rb = GetComponent<Rigidbody>();
         
         // Inicializa la dirección aleatoria de la pelota
@@ -46,7 +52,13 @@ public class BallController : MonoBehaviour
         {
             // La pelota colisiona con el objeto transparente que indica la derrota
             // Llama al método PlayerLost() del GameManager
+            
+            
+            fireManager.SaveDataButton(score);
+            uiManager.LostGame();
             gameManager.PlayerLost();
+            
+            
         }
     }
 }

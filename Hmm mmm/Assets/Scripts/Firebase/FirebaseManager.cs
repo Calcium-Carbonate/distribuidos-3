@@ -33,8 +33,9 @@ public class FirebaseManager : MonoBehaviour
     public TMP_Text warningRegisterText;
     
     [Header("UserData")]
-    public TMP_InputField usernameField;
-    public TMP_InputField killsField;
+    public TMP_Text usernameField;
+    public TMP_Text usernameField_GameUi;
+    public TMP_Text killsField;
     public GameObject scoreElement;
     public Transform scoreboardContent;
 
@@ -101,14 +102,12 @@ public class FirebaseManager : MonoBehaviour
         ClearRegisterFields();
         ClearLoginFields();
     }
-    public void SaveDataButton()
+    public void SaveDataButton(int score)
     {
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
-
-        //StartCoroutine(UpdateXp(int.Parse(xpField.text)));
-        StartCoroutine(UpdateKills(int.Parse(killsField.text)));
-        //StartCoroutine(UpdateDeaths(int.Parse(deathsField.text)));
+        
+        StartCoroutine(UpdateKills(score));
     }
     
     public void ScoreboardButton()
@@ -164,6 +163,7 @@ public class FirebaseManager : MonoBehaviour
             yield return new WaitForSeconds(2);
 
             usernameField.text = User.DisplayName;
+            usernameField_GameUi.text = User.DisplayName;
             UIManager.instance.UserDataScreen(); // Change to user data UI
             confirmLoginText.text = "";
             ClearLoginFields();
@@ -301,6 +301,7 @@ public class FirebaseManager : MonoBehaviour
         if (DBTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            
         }
         else
         {

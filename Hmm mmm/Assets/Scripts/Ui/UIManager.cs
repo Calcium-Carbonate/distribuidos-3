@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public GameObject registerUI;
     public GameObject userDataUI;
     public GameObject scoreboardUI;
+    public GameObject gameScreenUi;
+    public GameObject lostUi;
 
     private void Awake()
     {
@@ -32,6 +34,8 @@ public class UIManager : MonoBehaviour
         registerUI.SetActive(false);
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
+        gameScreenUi.SetActive(false);
+        lostUi.SetActive(false);
     }
 
     public void LoginScreen() //Back button
@@ -39,7 +43,7 @@ public class UIManager : MonoBehaviour
         ClearScreen();
         loginUI.SetActive(true);
     }
-    public void RegisterScreen() // Regester button
+    public void RegisterScreen() // Register button
     {
         ClearScreen();
         registerUI.SetActive(true);
@@ -55,6 +59,23 @@ public class UIManager : MonoBehaviour
     {
         ClearScreen();
         scoreboardUI.SetActive(true);
+    }
+    public void GameScreen() //Scoreboard button
+    {
+        ClearScreen();
+        gameScreenUi.SetActive(true);
+    }
+    // Método para reiniciar el nivel
+    public void RestartLevel()
+    {
+        ClearScreen();
+        userDataUI.SetActive(true);
+    }
+    
+    public void LostGame()
+    {
+        ClearScreen();
+        lostUi.SetActive(true);
     }
     
 }

@@ -9,20 +9,12 @@ public class GameManager : MonoBehaviour
 {
     public TMP_Text scoreText; // Referencia al objeto Text para mostrar la puntuación
     private int score = 0; // Puntuación del jugador
-
-    public GameObject gameOverPanel; // Referencia al panel de Game Over
+    
     public Button restartButton; // Referencia al botón de reinicio
+    public GameObject ball;
     
     private bool gameIsOver = false;
     
-    private void Start()
-    {
-        // Oculta el panel de Game Over al inicio
-        gameOverPanel.SetActive(false);
-
-        // Asigna una función al botón de reinicio
-        restartButton.onClick.AddListener(RestartLevel);
-    }
 
     // Método para incrementar la puntuación y actualizar el marcador
     public void IncreaseScore()
@@ -40,16 +32,18 @@ public class GameManager : MonoBehaviour
         if (!gameIsOver)
         {
             // Muestra el panel de Game Over
-            gameOverPanel.SetActive(true);
+
+            score = 0;
             gameIsOver = true;
         }
     }
-    
-    // Método para reiniciar el nivel
-    public void RestartLevel()
+
+    public void InitiateGame()
     {
-        // Carga la escena actual (esto reiniciará el nivel)
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Instantiate(ball);
+        Debug.LogWarning("Instanciado papaaaaaaaaa");
     }
+    
+
 
 }
