@@ -111,7 +111,10 @@ public class FirebaseManager : MonoBehaviour
         //StartCoroutine(UpdateDeaths(int.Parse(deathsField.text)));
     }
     
-    
+    public void ScoreboardButton()
+    {        
+        StartCoroutine(LoadScoreboardData());
+    }
     private IEnumerator Login(string _email, string _password)
     {
         //Call the Firebase auth signin function passing the email and password
