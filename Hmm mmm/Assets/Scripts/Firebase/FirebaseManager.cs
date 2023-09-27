@@ -396,7 +396,7 @@ public class FirebaseManager : MonoBehaviour
         if (SendPasswordResetEmailTask.Exception != null)
         {
             //bad ending
-            Debug.LogWarning($"Failed to send password reset email: {SendPasswordResetEmailTask.Exception}");
+            Debug.LogWarning($"Failed to send password reset email: {SendPasswordResetEmailTask.Exception}" );
             lostPasswordMessage.text = "Failed to send reset email";
         }
         else
