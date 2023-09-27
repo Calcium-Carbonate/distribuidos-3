@@ -39,7 +39,9 @@ public class FirebaseManager : MonoBehaviour
     public GameObject scoreElement;
     public Transform scoreboardContent;
    
-
+    //Email Recovery
+    public TMP_InputField lostPasswordEmail;
+    public TMP_Text lostPasswordMessage;
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -103,6 +105,7 @@ public class FirebaseManager : MonoBehaviour
         ClearRegisterFields();
         ClearLoginFields();
     }
+    //Function for saving data in firebase
     public void SaveDataButton(int score)
     {
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
@@ -111,6 +114,10 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(UpdateKills(score));
     }
 
+    public void PasswordRecover()
+    {
+        StartCoroutine(ForgotPassword(lostPasswordEmail.text));
+    }
     public void UpdateScore()
     {
         StartCoroutine(LoadUserData());
@@ -379,4 +386,23 @@ public class FirebaseManager : MonoBehaviour
         }
     }
     
+    private IEnumerator ForgotPassword(string _email)
+    {
+        var auth = FirebaseAuth.DefaultInstance;
+
+        Task SendPasswordResetEmailTask = auth.SendPasswordResetEmailAsync(_email);
+        yield return new WaitUntil(() => SendPasswordResetEmailTask.IsCompleted);
+
+        if (SendPasswordResetEmailTask.Exception != null)
+        {
+            //bad ending
+            Debug.LogWarning($"Failed to send password reset email: {SendPasswordResetEmailTask.Exception}");
+            lostPasswordMessage.text = "Failed to send reset email";
+        }
+        else
+        {
+            //good ending
+            lostPasswordMessage.text = "Reset email sent successfully";
+        }
+    }
 }

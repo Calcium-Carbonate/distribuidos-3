@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject userDataUI;
     public GameObject scoreboardUI;
     public GameObject gameScreenUi;
+    public GameObject passwordRecovery;
     public GameObject lostUi;
 
     public TMP_Text finalScore;
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
         scoreboardUI.SetActive(false);
         gameScreenUi.SetActive(false);
         lostUi.SetActive(false);
+        passwordRecovery.SetActive(false);
     }
 
     public void LoginScreen() //Back button
@@ -84,5 +86,10 @@ public class UIManager : MonoBehaviour
     {
         finalScore.text= "Final Score: " + score;
     }
-    
+
+    public void PasswordRecovery()
+    {
+        ClearScreen();
+        passwordRecovery.SetActive(true);
+    }
 }
